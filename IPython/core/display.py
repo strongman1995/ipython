@@ -279,7 +279,12 @@ def display(*objs, include=None, exclude=None, metadata=None, transient=None, di
     
     if not InteractiveShell.initialized():
         # Directly print objects.
-        print(*objs)
+        # print(*objs)
+        canvas = objs[0].canvas
+        import io
+        buffer = io.BytesIO()
+        canvas.print_png(buffer)
+        print(buffer.getvalue())
         return
     
     raw = kwargs.pop('raw', False)
