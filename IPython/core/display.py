@@ -284,7 +284,9 @@ def display(*objs, include=None, exclude=None, metadata=None, transient=None, di
         import io
         buffer = io.BytesIO()
         canvas.print_png(buffer)
-        print(buffer.getvalue())
+        data = buffer.getvalue()
+        data = b2a_base64(data).decode('ascii')
+        print(data)
         return
     
     raw = kwargs.pop('raw', False)
